@@ -1,0 +1,106 @@
+/* ==== Layout Geral ==== */
+body {
+    background-color: #0b1120;
+    color: #f0f0f5;
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ==== Cabeçalho ==== */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    margin-top: 60px;
+}
+
+.header-section h1 {
+    font-size: 2rem;
+    color: #fff;
+}
+
+.btn-novo {
+    background-color: #3b82f6;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-novo:hover {
+    background-color: #2563eb;
+}
+
+/* ==== Tabela ==== */
+.table-wrapper {
+    background-color: #111827;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.tabela-autores {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-autores thead {
+    background-color: #1f2937;
+}
+
+.tabela-autores th,
+.tabela-autores td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+}
+
+.tabela-autores th {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.tabela-autores tbody tr {
+    border-bottom: 1px solid #374151;
+}
+
+.tabela-autores tbody tr:hover {
+    background-color: #1e293b;
+}
+
+/* ==== Ações ==== */
+.btn-acao {
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-acao.editar {
+    background-color: #10b981;
+    color: #fff;
+}
+
+.btn-acao.editar:hover {
+    background-color: #059669;
+}
+
+.btn-acao.excluir {
+    background-color: #ef4444;
+    color: #fff;
+}
+
+.btn-acao.excluir:hover {
+    background-color: #dc2626;
+}

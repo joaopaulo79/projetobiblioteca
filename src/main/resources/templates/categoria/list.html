@@ -1,11 +1,48 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorias</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BiblioTECH</title>
+
+    <!-- Referência ao CSS -->
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/autor/list.css}">
 </head>
 <body>
+    <nav th:insert="/categoria/_navbar-categoria.html"></nav>
+
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Autores</h1>
+            <a href="/autor/new" class="btn-novo">+ Novo Autor</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="tabela-autores">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="a : ${autores}">
+                        <td th:text="${a.id}"></td>
+                        <td th:text="${a.nome}"></td>
+                        <td>
+                            <a th:href="@{/autor/edit/{id}(id=${a.id})}" class="btn-acao editar">Alterar</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/autor/show/{id}(id=${a.id})}" class="btn-acao excluir">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
     <h1>Categorias</h1>
     <a href="/categoria/new">Nova Categoria</a>
     <table>
