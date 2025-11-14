@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Categoria</title>
+</head>
+<body>
+    <h1>Excluir Categoria</h1>
+
+    <form th:action="@{/categoria/delete/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
+        <table>
+            <tr> 
+                <td th:text="${categoria.id}"></td>
+                <td th:text="${categoria.nome}"></td>
+                <td th:text="${categoria.descricao}"></td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Excluir</button>
+        </div>
+    </form>
+    
+    <a href="/categoria/list">Voltar para a lista</a>
+</body>
+</html>

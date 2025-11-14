@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Livro</title>
+</head>
+<body>
+    <h1>Criar Novo Livro</h1>
+
+    <form th:action="@{/livro/store}" th:object="${livro}" method="post">
+        <div>
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" th:field="*{isbn}" required>
+        </div>
+        <div>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" th:field="*{titulo}" required>
+        </div>
+        <div>
+            <label for="autores">Autores</label>
+            <select id="autores" th:field="*{autores}" multiple required>
+                <option th:each="a : ${listaAutores}" 
+                    th:value="${a.id}" 
+                    th:text="${a.nome}">
+            </select>
+        </div>
+
+        <div>
+            <label for="categorias">Categorias</label>
+            <select id="categorias" th:field="*{categorias}" multiple required>
+                <option th:each="c : ${listaCategorias}" 
+                    th:value="${c.id}" 
+                    th:text="${c.nome}">
+            </select>
+        </div>
+
+        <div>
+            <label for="editora">Editora:</label>
+            <input type="text" id="editora" th:field="*{editora}" required>
+        </div>
+        <div>
+            <label for="anoPublicacao">Ano de Publicação:</label>
+            <input type="number" id="anoPublicacao" th:field="*{anoPublicacao}" required>
+        </div>
+        <div>
+            <label for="numeroEdicao">Número da Edição:</label>
+            <input type="number" id="numeroEdicao" th:field="*{numeroEdicao}" required>
+        </div>
+
+        <div>
+            <label for="secao">Seção</label>
+            <select id="secao" th:field="*{secao}" required>
+                <option th:each="s : ${listaSecoes}" 
+                    th:value="${s.id}" 
+                    th:text="${s.nome}">
+            </select>
+        </div>
+
+        <div hidden="true">
+            <input type="checkbox" id="status" th:field="*{status}">
+        </div>
+        <div>
+            <button type="submit">Gravar</button>
+        </div>
+    </form>
+    
+    <a href="/livro/list">Voltar para a lista</a>
+</body>
+</html>

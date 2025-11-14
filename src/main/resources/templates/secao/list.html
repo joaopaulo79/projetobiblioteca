@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seções</title>
+</head>
+<body>
+    <h1>Seções</h1>
+    <a href="/secao/new">Nova Seção</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="s : ${secoes}">
+                <td th:text="${s.id}"></td>
+                <td th:text="${s.nome}"></td>
+                <td th:text="${s.descricao}"></td>
+                <td><a th:href="@{/secao/edit/{id}(id=${s.id})}">Alterar</a></td>
+                <td><a th:href="@{/secao/show/{id}(id=${s.id})}">Excluir</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

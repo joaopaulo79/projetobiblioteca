@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Livro</title>
+</head>
+<body>
+    <h1>Excluir Livro</h1>
+
+    <form th:action="@{/livro/delete/{id}(id=${livro.id})}" th:object="${livro}" method="post">
+        <table>
+            <tr><td th:text="${livro.id}"></td></tr>
+            <tr><td th:text="${livro.isbn}"></td></tr>
+            <tr><td th:text="${livro.titulo}"></td></tr>
+            <tr><td th:text="${livro.editora}"></td></tr>
+            <tr><td th:text="${livro.anoPublicacao}"></td></tr>
+            <tr><td th:text="${livro.numeroEdicao}"></td></tr>
+            <tr><td th:text="${livro.status}"></td></tr>
+        </table>
+        <div>
+            <button type="submit">Excluir</button>
+        </div>
+    </form>
+    
+    <a href="/livro/list">Voltar para a lista</a>
+</body>
+</html>

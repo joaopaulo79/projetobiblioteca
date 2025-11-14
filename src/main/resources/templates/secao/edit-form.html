@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edita Seção</title>
+</head>
+<body>
+
+    <h2>Edita Seção</h2>
+
+    <form th:action="@{/secao/update/{id}(id=${secao.id})}" th:object="${secao}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+        </div>
+         <div>
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" th:field="*{descricao}" required>
+        </div>
+        <div>
+            <button type="submit">Gravar</button>
+            <a th:href="@{/secao/list}">Voltar</a>
+        </div>
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Usuário</title>
+</head>
+<body>
+    <h1>Excluir Usuário</h1>
+
+    <form th:action="@{/usuario/delete/{id}(id=${usuario.id})}" th:object="${usuario}" method="post">
+        <table>
+            <tr> 
+                <td th:text="${usuario.id}"></td>
+                <td th:text="${usuario.nome}"></td>
+                <td th:text="${usuario.cpf}"></td>
+                <td th:text="${usuario.telefone}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.dtNascimento}"></td>
+                <td th:if="${usuario instanceof T(com.example.projetobiblioteca.model.Administrador)}">
+                    <p th:text="${usuario.loginUsuario}"></p>
+                    <p th:text="${usuario.loginSenha}"></p>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Excluir</button>
+        </div>
+    </form>
+    
+    <a href="/usuario/list">Voltar para a lista</a>
+</body>
+</html>

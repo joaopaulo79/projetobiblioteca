@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edita Autor</title>
+</head>
+<body>
+
+    <h2>Edita Autor</h2>
+
+    <form th:action="@{/autor/update/{id}(id=${autor.id})}" th:object="${autor}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+        </div>
+        <div>
+            <button type="submit">Gravar</button>
+            <a th:href="@{/autor/list}">Voltar</a>
+        </div>
+
+    </form>
+
+</body>
+</html>

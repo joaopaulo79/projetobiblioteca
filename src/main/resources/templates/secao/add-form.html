@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Seção</title>
+</head>
+<body>
+    <h1>Criar Nova Seção</h1>
+
+    <form th:action="@{/secao/store}" th:object="${secao}" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+        </div>
+        <div>
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" th:field="*{descricao}" required>
+        </div>
+        <div>
+            <button type="submit">Gravar</button>
+        </div>
+    </form>
+    
+    <a href="/secao/list">Voltar para a lista</a>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BiblioTECH</title>
+
+    <!-- Referência ao CSS -->
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/autor/list.css}">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Navegação principal">
+        <a href="#" class="brand">
+        <div class="logo">BT</div>
+        <div>
+            <h1>BiblioTECH</h1>
+            <span>Biblioteca & Tecnologia</span>
+        </div>
+        </a>
+
+        <div class="spacer" aria-hidden="true"></div>
+
+        <div class="nav-links" role="menubar" aria-label="Links principais">
+            <a href="#livros" role="menuitem">Livros</a>
+            <a href="#locacoes" role="menuitem">Locações</a>
+            <a href="#autores" role="menuitem" class="active">Autores</a>
+        </div>
+
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </nav>
+
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Autores</h1>
+            <a href="/autor/new" class="btn-novo">+ Novo Autor</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="tabela-autores">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="a : ${autores}">
+                        <td th:text="${a.id}"></td>
+                        <td th:text="${a.nome}"></td>
+                        <td>
+                            <a th:href="@{/autor/edit/{id}(id=${a.id})}" class="btn-acao editar">Alterar</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/autor/show/{id}(id=${a.id})}" class="btn-acao excluir">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script th:src="@{/scripts/autor/list.js}"></script>
+</body>
+</html>

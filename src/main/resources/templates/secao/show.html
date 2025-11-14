@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Seção</title>
+</head>
+<body>
+    <h1>Excluir Seção</h1>
+
+    <form th:action="@{/secao/delete/{id}(id=${secao.id})}" th:object="${secao}" method="post">
+        <table>
+            <tr> 
+                <td th:text="${secao.id}"></td>
+                <td th:text="${secao.nome}"></td>
+                <td th:text="${secao.descricao}"></td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Excluir</button>
+        </div>
+    </form>
+    
+    <a href="/secao/list">Voltar para a lista</a>
+</body>
+</html>

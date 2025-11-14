@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Autor</title>
+</head>
+<body>
+    <h1>Excluir Autor</h1>
+
+    <form th:action="@{/autor/delete/{id}(id=${autor.id})}" th:object="${autor}" method="post">
+        <table>
+            <tr> 
+                <td th:text="${autor.id}"></td>
+                <td th:text="${autor.nome}"></td>
+            </tr>
+        </table>
+        <div>
+            <button type="submit">Excluir</button>
+        </div>
+    </form>
+    
+    <a href="/autor/list">Voltar para a lista</a>
+</body>
+</html>

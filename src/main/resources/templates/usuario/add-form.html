@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Usuário</title>
+</head>
+<body>
+    <h1>Criar Novo Usuário</h1>
+
+    <form th:action="@{/usuario/store}" th:object="${usuario}" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+        </div>
+        <div>
+            <label for="cpf">CPF:</label>
+            <input type="number" id="cpf" th:field="*{cpf}" required>
+        </div>
+        <div>
+            <label for="telefone">Telefone:</label>
+            <input type="number" id="telefone" th:field="*{telefone}" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" th:field="*{email}" required>
+        </div>
+        <div>
+            <label for="dtNascimento">Data de Nascimento:</label>
+            <input type="date" id="dtNascimento" th:field="*{dtNascimento}" required>
+        </div>
+        <div>
+            <button type="submit">Gravar</button>
+        </div>
+    </form>
+    
+    <a href="/usuario/list">Voltar para a lista</a>
+</body>
+</html>
