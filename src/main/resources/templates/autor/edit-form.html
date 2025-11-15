@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BiblioTECH</title>
 
-    <!-- Referência ao CSS -->
     <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
     <link rel="stylesheet" th:href="@{/styles/autor/edit-form.css}">
+
+    <script th:src="@{/scripts/autor/edit-form.js}"></script>
 </head>
 <body>
     <nav th:insert="/autor/_navbar-autor.html"></nav>
@@ -30,13 +31,11 @@
 
             <div class="form-buttons">
                 <button type="submit">Gravar</button>
+                <button type="button" class="clear-button" onclick="limparCampos()">Limpar</button>
                 <button type="reset">Restaurar</button>
                 <a href="/autor/list" class="btn-acao retornar">Voltar</a>
             </div>
-
         </form>
     </main>
-
-    <script th:src="@{/scripts/autor/edit-form.js}"></script>
 </body>
 </html>

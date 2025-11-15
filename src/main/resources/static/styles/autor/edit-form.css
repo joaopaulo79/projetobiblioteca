@@ -104,6 +104,21 @@ button[type="reset"]:hover {
     background-color: #2563eb;
 }
 
+.clear-button {
+    background-color: #ef4444;
+    border: none;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.clear-button:hover {
+    background-color: #dc2626;
+}
+
 /* Botão Voltar */
 .btn-acao.retornar {
     display: inline-block;
