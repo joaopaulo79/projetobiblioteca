@@ -7,61 +7,44 @@
 
     <!-- Referência ao CSS -->
     <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
-    <link rel="stylesheet" th:href="@{/styles/autor/list.css}">
+    <link rel="stylesheet" th:href="@{/styles/categoria/list.css}">
 </head>
 <body>
     <nav th:insert="/categoria/_navbar-categoria.html"></nav>
 
     <main class="container">
         <div class="header-section">
-            <h1 id="header-section-h1">Autores</h1>
-            <a href="/autor/new" class="btn-novo">+ Novo Autor</a>
+            <h1 id="header-section-h1">Categorias</h1>
+            <a href="/categoria/new" class="btn-novo">+ Nova Categoria</a>
         </div>
 
         <div class="table-wrapper">
-            <table class="tabela-autores">
+            <table class="tabela-categorias">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
+                        <th>Descrição</th>
                         <th colspan="2">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="a : ${autores}">
-                        <td th:text="${a.id}"></td>
-                        <td th:text="${a.nome}"></td>
+                    <tr th:each="c : ${categorias}">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.nome}"></td>
+                        <td th:text="${c.descricao}"></td>
                         <td>
-                            <a th:href="@{/autor/edit/{id}(id=${a.id})}" class="btn-acao editar">Alterar</a>
+                            <a th:href="@{/categoria/edit/{id}(id=${c.id})}" class="btn-acao editar">Alterar</a>
                         </td>
                         <td>
-                            <a th:href="@{/autor/show/{id}(id=${a.id})}" class="btn-acao excluir">Excluir</a>
+                            <a th:href="@{/categoria/show/{id}(id=${c.id})}" class="btn-acao excluir">Excluir</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
-
-    <h1>Categorias</h1>
-    <a href="/categoria/new">Nova Categoria</a>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="c : ${categorias}">
-                <td th:text="${c.id}"></td>
-                <td th:text="${c.nome}"></td>
-                <td th:text="${c.descricao}"></td>
-                <td><a th:href="@{/categoria/edit/{id}(id=${c.id})}">Alterar</a></td>
-                <td><a th:href="@{/categoria/show/{id}(id=${c.id})}">Excluir</a></td>
-            </tr>
-        </tbody>
-    </table>
+    
+    <script th:src="@{/scripts/categoria/list.js}"></script>
 </body>
 </html>

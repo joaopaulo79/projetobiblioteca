@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -48,33 +48,33 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-.tabela-autores {
+.tabela-categorias {
     width: 100%;
     border-collapse: collapse;
 }
 
-.tabela-autores thead {
+.tabela-categorias thead {
     background-color: #1f2937;
 }
 
-.tabela-autores th,
-.tabela-autores td {
+.tabela-categorias th,
+.tabela-categorias td {
     padding: 0.8rem 1rem;
     text-align: left;
 }
 
-.tabela-autores th {
+.tabela-categorias th {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-size: 0.85rem;
     color: #9ca3af;
 }
 
-.tabela-autores tbody tr {
+.tabela-categorias tbody tr {
     border-bottom: 1px solid #374151;
 }
 
-.tabela-autores tbody tr:hover {
+.tabela-categorias tbody tr:hover {
     background-color: #1e293b;
 }
 
