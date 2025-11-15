@@ -1,29 +1,53 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Edita Categoria</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BiblioTECH</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/categoria/edit-form.css}">
+
+    <script th:src="@{/scripts/categoria/edit-form.js}"></script>
 </head>
 <body>
+    <nav th:insert="/categoria/_navbar-categoria.html"></nav>
 
-    <h2>Edita Categoria</h2>
-
-    <form th:action="@{/categoria/update/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
-        <input type="hidden" th:field="*{id}" />
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" th:field="*{nome}" required>
-        </div>
-         <div>
-            <label for="descricao">Descrição:</label>
-            <input type="text" id="descricao" th:field="*{descricao}" required>
-        </div>
-        <div>
-            <button type="submit">Gravar</button>
-            <a th:href="@{/categoria/list}">Voltar</a>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Editar Categoria</h1>
         </div>
 
-    </form>
+        <form th:action="@{/categoria/update/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
+            <div>
+                <label for="nome" id="header-label-current" class="header-label">Nome</label>
+                <p th:text="*{nome}" id="input-nome"></p>
+            </div>
 
+            <div>
+                <label for="descricao" id="header-label-current" class="header-label">Descrição</label>
+                <p th:text="*{descricao}" id="input-descricao"></p>
+            </div>
+        </form>
+
+        <form id="form-edit" th:action="@{/categoria/update/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
+            <div>
+                <label for="nome" class="header-label">Novo Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" required>
+            </div>
+
+            <div>
+                <label for="descricao" class="header-label">Nova Descrição</label>
+                <input type="text" id="descricao" th:field="*{descricao}" required>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit">Gravar</button>
+                <button type="button" class="clear-button" onclick="limparCampos()">Limpar</button>
+                <button type="reset">Restaurar</button>
+                <a href="/categoria/list" class="btn-acao retornar">Voltar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

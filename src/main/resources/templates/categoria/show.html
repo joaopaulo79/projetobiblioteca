@@ -1,25 +1,32 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Excluir Categoria</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BiblioTECH</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/categoria/show.css}">
 </head>
 <body>
-    <h1>Excluir Categoria</h1>
+    <nav th:insert="/categoria/_navbar-categoria.html"></nav>
 
-    <form th:action="@{/categoria/delete/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
-        <table>
-            <tr> 
-                <td th:text="${categoria.id}"></td>
-                <td th:text="${categoria.nome}"></td>
-                <td th:text="${categoria.descricao}"></td>
-            </tr>
-        </table>
-        <div>
-            <button type="submit">Excluir</button>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Excluir Categoria</h1>
         </div>
-    </form>
-    
-    <a href="/categoria/list">Voltar para a lista</a>
+
+        <form th:action="@{/categoria/delete/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
+            <div>
+                <label for="nome">Deseja excluir essa categoria?</label>
+                <input type="text" id="nome" th:field="*{nome}" readonly>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit">Excluir</button>
+                <a href="/categoria/list" class="btn-acao retornar">Voltar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BiblioTECH</title>
 
-    <!-- Referência ao CSS -->
     <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
     <link rel="stylesheet" th:href="@{/styles/categoria/list.css}">
+
+    <script th:src="@{/scripts/categoria/list.js}"></script>
 </head>
 <body>
     <nav th:insert="/categoria/_navbar-categoria.html"></nav>
@@ -44,7 +45,5 @@
             </table>
         </div>
     </main>
-    
-    <script th:src="@{/scripts/categoria/list.js}"></script>
 </body>
 </html>
