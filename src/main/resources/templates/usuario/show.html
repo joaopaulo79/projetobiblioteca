@@ -16,7 +16,7 @@
                 <td th:text="${usuario.telefone}"></td>
                 <td th:text="${usuario.email}"></td>
                 <td th:text="${usuario.dtNascimento}"></td>
-                <td th:if="${usuario instanceof T(com.example.projetobiblioteca.model.Administrador)}">
+                <td th:if="${usuario.tipo.equals('administrador')}">
                     <p th:text="${usuario.loginUsuario}"></p>
                     <p th:text="${usuario.loginSenha}"></p>
                 </td>

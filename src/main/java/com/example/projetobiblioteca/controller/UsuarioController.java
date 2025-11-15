@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.projetobiblioteca.dto.UsuarioDTO;
+import com.example.projetobiblioteca.model.Administrador;
 import com.example.projetobiblioteca.model.Usuario;
 import com.example.projetobiblioteca.repository.UsuarioRepository;
 
@@ -28,44 +30,56 @@ public class UsuarioController {
 
     @GetMapping("/usuario/new")
     public String showAddUsuarioForm(Model model) {
-        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("usuario", new UsuarioDTO());
         return "usuario/add-form"; 
     }
 
     @PostMapping("/usuario/store")
-    public String addUsuario(@ModelAttribute Usuario usuario) {
-        usuarioRepository.save(usuario);
+    public String addUsuario(@ModelAttribute UsuarioDTO usuarioForm) {
+        if (usuarioForm.getTipo().equals("usuario")) {
+            Usuario usuario = usuarioForm.toUsuario();
+            usuarioRepository.save(usuario);
+        } else if (usuarioForm.getTipo().equals("administrador")) {
+            Administrador administrador = usuarioForm.toAdministrador();
+            usuarioRepository.save(administrador);
+        } 
         return "redirect:/usuario/list";
     }
 
     @GetMapping("usuario/edit/{id}")
     public String showEditForm(@PathVariable("id") long id, Model model) {
-        Usuario a = usuarioRepository.findById(id)
+        Usuario usuario = usuarioRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Id inválido:" + id));
+        UsuarioDTO dto = new UsuarioDTO(usuario);
 
-        model.addAttribute("usuario", a);
+        model.addAttribute("usuario", dto);
         return "usuario/edit-form";
     }
 
     @PostMapping("usuario/update/{id}")
     public String updateUsuario(@PathVariable("id") long id,
-                                @ModelAttribute("usuario") Usuario usuario,
+                                @ModelAttribute("usuario") UsuarioDTO dto,
                                 BindingResult result,
                                 Model model) {
+        if (dto.getTipo().equals("usuario")) {
+            Usuario usuario = dto.toUsuario();
+            usuarioRepository.save(usuario);
+        } else {
+            Administrador administrador = dto.toAdministrador();
+            usuarioRepository.save(administrador);
+        }
 
-        usuario.setId(id);
-
-        usuarioRepository.save(usuario);
 
         return "redirect:/usuario/list";
     }
 
     @GetMapping("usuario/show/{id}")
     public String showUsuario(@PathVariable("id") long id, Model model) {
-        Usuario a = usuarioRepository.findById(id)
+        Usuario usuario = usuarioRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Id inválido:" + id));
 
-        model.addAttribute("usuario", a);
+        UsuarioDTO dto = new UsuarioDTO(usuario);
+        model.addAttribute("usuario", dto);
         return "usuario/show";
     }
 
