@@ -46,13 +46,7 @@ public class Livro {
     ) 
     private List<Categoria> categorias = new ArrayList<Categoria>();
 
-    @ManyToMany
-    @JoinTable(
-        name="locacao_livro",
-        joinColumns = @JoinColumn(name ="livro_id"),
-        inverseJoinColumns = @JoinColumn(name="locacao_id")
-    ) 
-
+    @ManyToMany(mappedBy = "livros")
     private List<Locacao> locacoes = new ArrayList<Locacao>();
 
     public Livro() {

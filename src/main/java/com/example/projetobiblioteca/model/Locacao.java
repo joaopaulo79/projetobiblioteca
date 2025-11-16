@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -30,7 +31,12 @@ public class Locacao {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToMany(mappedBy = "locacoes")
+    @ManyToMany
+    @JoinTable(
+        name="locacao_livro",
+        joinColumns = @JoinColumn(name ="locacao_id"),
+        inverseJoinColumns = @JoinColumn(name="livro_id")
+    ) 
     private List<Livro> livros = new ArrayList<Livro>();
 
 
@@ -100,14 +106,4 @@ public class Locacao {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    /*
-    public  getX() {
-        return z;
-    }
-
-    public void setX( z){
-        this.z = z;
-    }
-     */
 }

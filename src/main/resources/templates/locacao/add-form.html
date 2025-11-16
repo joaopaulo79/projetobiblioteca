@@ -2,21 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Novo Autor</title>
+    <title>Nova Locacao</title>
 </head>
 <body>
-    <h1>Criar Novo Autor</h1>
+    <h1>Criar Nova Locacao</h1>
 
-    <form th:action="@{/autor/store}" th:object="${autor}" method="post">
+    <form th:action="@{/locacao/store}" th:object="${locacao}" method="post">
         <div>
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" th:field="*{nome}" required>
+            <label for="dataEmprestimo">Data de Empréstimo:</label>
+            <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" required>
         </div>
+        <div>
+            <label for="dataDevolucaoPrevista">Data de Devolução Prevista:</label>
+            <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}" required>
+        </div>
+
+        <div hidden>
+            <label for="dataDevolucaoPrevista">Data de Devolução:</label>
+            <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}">
+        </div>
+
+        <div>
+            <label for="usuario">usuario</label>
+            <select id="usuario" th:field="*{usuario}" required>
+                <option th:each="u : ${listaUsuarios}" 
+                    th:value="${u.id}" 
+                    th:text="${u.nome}">
+            </select>
+        </div>
+
+        <div>
+            <label for="livros">Livros</label>
+            <select id="livros" th:field="*{livros}" multiple required>
+                <option th:each="l : ${listaLivros}" 
+                    th:value="${l.id}" 
+                    th:text="${l.titulo}">
+            </select>
+        </div>
+
         <div>
             <button type="submit">Gravar</button>
         </div>
     </form>
     
-    <a href="/autor/list">Voltar para a lista</a>
+    <a href="/locacao/list">Voltar para a lista</a>
 </body>
 </html>

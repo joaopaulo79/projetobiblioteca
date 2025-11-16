@@ -2,23 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Excluir Autor</title>
+    <title>Excluir Locação</title>
 </head>
 <body>
-    <h1>Excluir Autor</h1>
+    <h1>Excluir Locação</h1>
 
-    <form th:action="@{/autor/delete/{id}(id=${autor.id})}" th:object="${autor}" method="post">
+    <form th:action="@{/locacao/delete/{id}(id=${locacao.id})}" th:object="${locacao}" method="post">
         <table>
-            <tr> 
-                <td th:text="${autor.id}"></td>
-                <td th:text="${autor.nome}"></td>
-            </tr>
+            <tr>
+                <td th:text="${locacao.id}"></td>
+                    <td th:text="${locacao.dataEmprestimo}"></td>
+                    <td th:text="${locacao.dataDevolucaoPrevista}"></td>
+                    <td th:text="${locacao.dataDevolucao} ?: 'Não devolvido'"></td>
+                    <td>
+                        <p>ID: <span th:text="${locacao.usuario.id}"></span> <br />
+                            Nome: <span th:text="${locacao.usuario.nome}"></span></p>
+                    </td>
+                    <td>
+                        <p th:each="livro : ${locacao.livros}">
+                            ISBN: <span th:text="${livro.isbn}"></span> <br />
+                            Título: <span th:text="${livro.titulo}"></span>
+                        </p>
+                    </td>
+                </tr>
         </table>
         <div>
             <button type="submit">Excluir</button>
         </div>
     </form>
     
-    <a href="/autor/list">Voltar para a lista</a>
+    <a href="/locacao/list">Voltar para a lista</a>
 </body>
 </html>
