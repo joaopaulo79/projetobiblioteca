@@ -31,7 +31,8 @@ public class BuscaAvancadaController {
     }
 
     @GetMapping("/buscaavancada/")
-    public String getBuscaForm() {
+    public String getBuscaForm(Model model) {
+        model.addAttribute("semConsulta", true);
         return "buscaavancada/form";
     }
 
@@ -67,7 +68,9 @@ public class BuscaAvancadaController {
                     usuarioRepository.findById(idPai).ifPresent(usuario -> {
                     model.addAttribute("pai", usuario);
                 });              }
-            default -> {}
+            default -> {
+                //model.addAttribute("pai", null) ;
+            }
         }
         model.addAttribute("tipo", tipoPai);
         return "buscaavancada/form";

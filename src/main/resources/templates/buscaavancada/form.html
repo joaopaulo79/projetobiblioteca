@@ -28,7 +28,7 @@
         <button type="submit">Buscar</button>
     </form>
 
-    <th:block th:if="${pai == null}">
+    <th:block th:if="${pai == null && semConsulta == null}">
         <h1>Erro: id ou tipo inválido</h1>
     </th:block>
 
