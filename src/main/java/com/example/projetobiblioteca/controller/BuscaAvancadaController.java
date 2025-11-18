@@ -6,24 +6,23 @@ import org.springframework.ui.Model;
 import com.example.projetobiblioteca.repository.AutorRepository;
 import com.example.projetobiblioteca.repository.CategoriaRepository;
 import com.example.projetobiblioteca.repository.LivroRepository;
-import com.example.projetobiblioteca.repository.LocacaoRepository;
 import com.example.projetobiblioteca.repository.SecaoRepository;
 import com.example.projetobiblioteca.repository.UsuarioRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class BuscaAvancada {
+public class BuscaAvancadaController {
     private final AutorRepository autorRepository;
     private final CategoriaRepository categoriaRepository;
     private final SecaoRepository secaoRepository;
-    private final LocacaoRepository locacaoRepository;
     private final LivroRepository livroRepository;
     private final UsuarioRepository usuarioRepository;
     
-    public BuscaAvancada(LocacaoRepository locacaoRepository, UsuarioRepository usuarioRepository, LivroRepository livroRepository,
+    public BuscaAvancadaController(UsuarioRepository usuarioRepository, LivroRepository livroRepository,
                             AutorRepository autorRepository, CategoriaRepository categoriaRepository, SecaoRepository secaoRepository) {
-        this.locacaoRepository = locacaoRepository;
         this.livroRepository = livroRepository;
         this.usuarioRepository = usuarioRepository;
         this.autorRepository = autorRepository;
@@ -35,43 +34,42 @@ public class BuscaAvancada {
     public String getBuscaForm() {
         return "buscaavancada/form";
     }
+
+    @PostMapping("/buscaavancada/redirect")
+    public String redirectBusca(@RequestParam String tipoPai, 
+                               @RequestParam Long idPai) {
+        return "redirect:/buscaavancada/" + tipoPai + "&" + idPai;
+    }
     
-    @GetMapping("/buscaavancada/{tipoPai}&{idPai}&{tipoFilho}")
+    @GetMapping("/buscaavancada/{tipoPai}&{idPai}")
     public String getBuscaForm(@PathVariable("tipoPai") String tipoPai,
-                                @PathVariable("tipoFilho") String tipoFilho,
-                                @PathVariable("id") long idPai, Model model) {
+                                @PathVariable("idPai") long idPai, Model model) {
         switch (tipoPai) {
             case "autor" -> {
-                if (tipoFilho.equals("livro")) {
-                    model.addAttribute("pai", autorRepository.findById(idPai));
-                    model.addAttribute("filho", livroRepository.findByAutorId(idPai));
-                }
+                autorRepository.findById(idPai).ifPresent(autor -> {
+                    model.addAttribute("pai", autor);
+                });
             }
             case "categoria" -> {
-                if (tipoFilho.equals("livro")) {
-                    model.addAttribute("pai", categoriaRepository.findById(idPai));
-                    model.addAttribute("filho", livroRepository.findByCategoriaId(idPai));
-                }
+                categoriaRepository.findById(idPai).ifPresent(categoria -> {
+                    model.addAttribute("pai", categoria);
+                });
             }
             case "secao" -> {
-                if (tipoFilho.equals("livro")) {
-                    model.addAttribute("pai", secaoRepository.findById(idPai));
-                    model.addAttribute("filho", livroRepository.findBySecaoId(idPai));
-                }
-            }
+                    secaoRepository.findById(idPai).ifPresent(secao -> {
+                    model.addAttribute("pai", secao);
+                });            }
             case "livro" -> {
-                if (tipoFilho.equals("livro")) {
-                    model.addAttribute("filho", livroRepository.findByAutorId(idPai));
-                }
-                model.addAttribute("pai", livroRepository.findById(idPai));
-            }
+                    livroRepository.findById(idPai).ifPresent(livro -> {
+                    model.addAttribute("pai", livro);
+                });              }
             case "usuario" -> {
-                model.addAttribute("pai", usuarioRepository.findById(idPai));
-            }
+                    usuarioRepository.findById(idPai).ifPresent(usuario -> {
+                    model.addAttribute("pai", usuario);
+                });              }
             default -> {}
         }
-
-
+        model.addAttribute("tipo", tipoPai);
         return "buscaavancada/form";
     }
 }

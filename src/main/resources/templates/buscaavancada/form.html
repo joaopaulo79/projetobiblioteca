@@ -6,6 +6,127 @@
     <title>Busca Avançada</title>
 </head>
 <body>
-    
+    <form th:action="@{/buscaavancada/redirect}" method="post">
+        <div>
+            <label for="tipoPai">Buscar livros/locações de:</label>
+            <select id="tipoPai" name="tipoPai" required>
+                <option value="">Selecione um tipo</option>
+                <option value="autor">Autor</option>
+                <option value="livro">Livro</option>
+                <option value="categoria">Categoria</option>
+                <option value="secao">Seção</option>
+                <option value="usuario">Usuário</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="idPai">ID:</label>
+            <input type="number" id="idPai" name="idPai" min="1" 
+                   placeholder="Digite o ID" required>
+        </div>
+        
+        <button type="submit">Buscar</button>
+    </form>
+
+    <th:block th:if="${pai == null}">
+        <h1>Erro: id ou tipo inválido</h1>
+    </th:block>
+
+    <th:block th:if="${pai != null}">
+        <th:block th:switch="${tipo}">
+            <th:block th:case="autor">
+                <table>
+                    <thead><tr><th>ID</th><th>Nome</th></tr></thead>
+                    <tbody>
+                        <tr th:include="fragments/conteudo-entidades :: dados-autor(${pai}, ${false})"></tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr></thead>
+                    <tbody>
+                        <tr th:each="livro : ${pai.listaLivros}"
+                        th:include="fragments/conteudo-entidades :: dados-livro(${livro}, ${false}, ${false})"></tr>
+                    </tbody>
+                </table>
+            </th:block>
+            
+            <th:block th:case="categoria">
+                <table>
+                    <thead><tr><th>ID</th><th>Nome</th><th>Descrição</th></tr></thead>
+                        <tbody>
+                        <tr th:include="fragments/conteudo-entidades :: dados-categoria(${pai}, ${false}, ${true})">
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr></thead>
+                    <tbody>
+                        <tr th:each="livro : ${pai.listaLivros}"
+                        th:include="fragments/conteudo-entidades :: dados-livro(${livro}, ${false}, ${false})"></tr>
+                    </tbody>
+                </table>
+            </th:block>
+
+            <th:block th:case="secao">
+                <table>
+                    <thead><tr><th>ID</th><th>Nome</th><th>Descrição</th></tr></thead>
+                    <tbody>
+                        <tr th:include="fragments/conteudo-entidades :: dados-secao(${pai}, ${false}, ${true})">
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr></thead>
+                    <tbody>
+                        <tr th:each="livro : ${pai.listaLivros}"
+                        th:include="fragments/conteudo-entidades :: dados-livro(${livro}, ${false}, ${false})"></tr>
+                    </tbody>
+                </table>
+            </th:block>
+
+            <th:block th:case="livro">
+                <table>
+                    <thead><tr>
+                        <th>ID</th>
+                        <th>ISBN</th>
+                        <th>Título</th>
+                        <th>Ano de Publicação</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr th:include="fragments/conteudo-entidades :: dados-livro(${pai}, ${false}, ${false})"></tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr><th>ID</th><th>Data de Empréstimo</th></tr></thead>
+                    <tbody>
+                        <tr th:each="locacao : ${pai.locacoes}"
+                        th:include="fragments/conteudo-entidades :: dados-locacao(${locacao}, ${false}, ${false})"></tr>
+                    </tbody>
+                </table>
+            </th:block>
+
+            <th:block th:case="usuario">
+                <table>
+                    <thead><tr><th>ID</th><th>Nome</th></tr></thead>
+                    <tbody>
+                        <tr th:include="fragments/conteudo-entidades :: dados-usuario(${pai}, ${false}, ${false})"></tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr>
+                        <th>ID</th>
+                        <th>Data de Empréstimo</th>
+                        <th>Devolução Prevista</th>
+                        <th>Data de Devolução</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr th:each="locacao : ${pai.locacoes}"
+                        th:include="fragments/conteudo-entidades :: dados-locacao(
+                            ${locacao}, ${false}, ${false})"></tr>
+                        </tbody>
+                    </table>
+            </th:block>
+        </th:block>
+    </th:block>
 </body>
 </html>
