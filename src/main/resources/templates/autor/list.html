@@ -18,7 +18,7 @@
             <a href="/autor/new" class="btn-novo">+ Novo Autor</a>
         </div>
 
-        <div class="table-wrapper">
+        <!-- <div class="table-wrapper">
             <table class="tabela-autores">
                 <thead>
                     <tr>
@@ -40,7 +40,8 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> -->
+        <div th:include="fragments/tabelas :: tabela-autores(${autores})"></div>
     </main>
 
     <script th:src="@{/scripts/autor/list.js}"></script>

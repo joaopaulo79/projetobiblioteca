@@ -7,160 +7,61 @@
 </head>
 <body>
     <!-- Autor -->
-    <tr th:fragment="dados-autor(autor, exibeAcoes)">
-        <td th:text="${autor.id}"></td>
+    <th:block th:fragment="dados-autor(autor)">
+        <td><a th:href="@{/autor/show/{id}(id=${autor.id})}" th:text="${autor.id}"></a></td>
         <td th:text="${autor.nome}"></td>
-
-        <th:block th:if="${exibeAcoes}">
-            <td>
-                <a th:href="@{/autor/edit/{id}(id=${autor.id})}" class="btn-acao editar">Alterar</a>
-            </td>
-            <td>
-                <a th:href="@{/autor/show/{id}(id=${autor.id})}" class="btn-acao excluir">Excluir</a>
-            </td>
-        </th:block>
-    </tr>
+    </th:block>
 
     <!-- Categoria -->
-    <tr th:fragment="dados-categoria(categoria, exibeAcoes, todosOsDados)">
-        <td th:text="${categoria.id}"></td>
+    <th:block th:fragment="dados-categoria(categoria, mini)">
+        <td><a th:href="@{/categoria/show/{id}(id=${categoria.id})}" th:text="${categoria.id}"></a></td>
         <td th:text="${categoria.nome}"></td>
         
-        <td th:if="${todosOsDados}" th:text="${categoria.descricao}"></td>
-        
-        <th:block th:if="${exibeAcoes}">
-            <td>
-                <a th:href="@{/categoria/edit/{id}(id=${categoria.id})}" class="btn-acao editar">Alterar</a>
-            </td>
-            <td>
-                <a th:href="@{/categoria/show/{id}(id=${categoria.id})}" class="btn-acao excluir">Excluir</a>
-            </td>
-        </th:block>
-    </tr>
+        <td th:if="${!mini}" th:text="${categoria.descricao}"></td>
+    </th:block>
     
     <!-- Secao -->
-    <tr th:fragment="dados-secao(secao, exibeAcoes, todosOsDados)">
-        <td th:text="${secao.id}"></td>
+    <th:block th:fragment="dados-secao(secao, mini)">
+        <td><a th:href="@{/secao/show/{id}(id=${secao.id})}" th:text="${secao.id}"></a></td>
         <td th:text="${secao.nome}"></td>
         
-        <td th:if="${todosOsDados}" th:text="${secao.descricao}"></td>
-
-        <th:block th:if="${exibeAcoes}">
-            <td>
-                <a th:href="@{/secao/edit/{id}(id=${secao.id})}" class="btn-acao editar">Alterar</a>
-            </td>
-            <td>
-                <a th:href="@{/secao/show/{id}(id=${secao.id})}" class="btn-acao excluir">Excluir</a>
-            </td>
-        </th:block>
-    </tr>
+        <td th:if="${!mini}" th:text="${secao.descricao}"></td>
+    </th:block>
 
     <!-- Livro -->
-    <tr th:fragment="dados-livro(livro, todosOsDados, exibeAcoes)">
-        <td th:text="${livro.id}"></td>
+    <th:block th:fragment="dados-livro(livro, mini)">
+        <td><a th:href="@{/livro/show/{id}(id=${livro.id})}" th:text="${livro.id}"></a></td>
         <td th:text="${livro.isbn}"></td>
         <td th:text="${livro.titulo}"></td>
         <td th:text="${livro.anoPublicacao}"></td>
-
-        <th:block th:if="${todosOsDados}">
+        
+        <th:block th:if="${!mini}">
             <td th:text="${livro.editora}"></td>
             <td th:text="${livro.numeroEdicao}"></td>
+            <td th:text="${livro.status} ? 'Disponível' : 'Emprestado'"></td>
             <td th:text="${livro.secao.nome}"></td>
-            <td>
-                <table>
-                    <thead>
-                        <tr><th>ID</th><th>Nome</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="autor : ${livro.autores}"
-                            th:include="fragments/conteudo-entidades :: dados-autor(
-                                ${autor}, ${false})">
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <thead>
-                        <tr><th>ID</th><th>Nome</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="categoria : ${livro.categorias}"
-                            th:include="fragments/conteudo-entidades :: dados-categoria(
-                                ${categoria}, ${false})"></tr>
-                    </tbody>
-                </table>
-            </td>
-            <td th:text="${livro.status}"></td>
         </th:block>
-        <th:block th:if="${exibeAcoes}">
-            <td>
-                <a th:href="@{/livro/edit/{id}(id=${livro.id})}" class="btn-acao editar">Alterar</a>
-            </td>
-            <td>
-                <a th:href="@{/livro/show/{id}(id=${livro.id})}" class="btn-acao excluir">Excluir</a>
-            </td>
-        </th:block>
-    </tr>
+    </th:block>
 
     <!-- Usuário -->
-    <tr th:fragment="dados-usuario(usuario, todosOsDados, exibeAcoes)">
-        <td th:text="${usuario.id}"></td>
+    <th:block th:fragment="dados-usuario(usuario, mini)">
+        <td><a th:href="@{/usuario/show/{id}(id=${usuario.id})}" th:text="${usuario.id}"></a></td>
         <td th:text="${usuario.nome}"></td>
             
-        <th:block th:if="${todosOsDados}">                
+        <th:block th:if="${!mini}">                
             <td th:text="${usuario.cpf}"></td>
             <td th:text="${usuario.telefone}"></td>
             <td th:text="${usuario.email}"></td>
             <td th:text="${usuario.dtNascimento}"></td>
         </th:block>
-
-        <th:block th:if="${exibeAcoes}">                
-            <td><a th:href="@{/usuario/edit/{id}(id=${usuario.id})}">Alterar</a></td>
-            <td><a th:href="@{/usuario/show/{id}(id=${usuario.id})}">Excluir</a></td>
-        </th:block>
-    </tr>
+    </th:block>
 
     <!-- Locação -->
-    <tr th:fragment="dados-locacao(locacao, todosOsDados, exibeAcoes)">
-        <td th:text="${locacao.id}"></td>
+    <th:block th:fragment="dados-locacao(locacao)">
+        <td><a th:href="@{/locacao/show/{id}(id=${locacao.id})}" th:text="${locacao.id}"></a></td>
         <td th:text="${locacao.dataEmprestimo}"></td>
         <td th:text="${locacao.dataDevolucaoPrevista}"></td>
         <td th:text="${locacao.dataDevolucao} ?: 'Não devolvido'"></td>
-        
-        <th:block th:if="${todosOsDados}">
-            <td>
-                <table>
-                    <thead>
-                        <tr><th>ID</th><th>Nome</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr th:include="fragments/conteudo-entidades :: dados-usuario(
-                                ${locacao.usuario}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <thead>
-                        <tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="autor : ${locacao.livros}"
-                            th:include="fragments/conteudo-entidades :: dados-autor(
-                                ${autor}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
-            </td>
-        </th:block>
-        <th:block th:if="${exibeAcoes}">        
-            <td>
-                <a th:href="@{/locacao/edit/{id}(id=${locacao.id})}" class="btn-acao editar">Alterar</a>
-            </td>
-            <td>
-                <a th:href="@{/locacao/show/{id}(id=${locacao.id})}" class="btn-acao excluir">Excluir</a>
-            </td>
-        </th:block>
-    </tr>
+    </th:block>
 </body>
 </html>

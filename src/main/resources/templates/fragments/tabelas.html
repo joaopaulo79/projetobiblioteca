@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragments</title>
+</head>
+<body>
+    
+    <div class="table-wrapper" th:fragment="tabela-autores(autores)">
+        <table class="tabela-autores">
+            <thead><tr><th>ID</th><th>Nome</th></tr></thead>
+            <tbody>
+                <tr th:each="autor : ${autores}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-autor(${autor})"></th:block>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <thead th:fragment="thead-handler">
+        <th:block th:switch="${tipoDados}">
+            <tr th:case="'autores'">
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+            <tr th:case="'mini-categorias'">
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+            <tr th:case="'mini-secoes'">
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+            <tr th:case="'mini-usuarios'">
+                <th>ID</th>
+                <th>Nome</th>
+            </tr>
+            <tr th:case="'categorias'">
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+            <tr th:case="'secoes'">
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+            </tr>
+            <tr th:case="'mini-livros'">
+                <th>ID</th>
+                <th>ISBN</th>
+                <th>Título</th>
+            </tr>
+            <tr th:case="'usuarios'">
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Data de Nascimento</th>
+            </tr>
+            <tr th:case="'livros'">
+                <th>ID</th>
+                <th>ISBN</th>
+                <th>Título</th>
+                <th>Ano de Publicação</th>
+                <th>Editora</th>
+                <th>Edição</th>
+                <th>Status</th>
+                <th>Seção</th>
+                <th>Autores</th>
+                <th>Categorias</th>
+            </tr>
+            <tr th:case="'mini-locacoes'">
+                <th>ID</th>
+                <th>Data de Empréstimo</th>
+                <th>Data de Devolução Prevista</th>
+                <th>Data de Devolução</th>
+            </tr>
+            <tr th:case="'locacoes'">
+                <th>ID</th>
+                <th>Data de Empréstimo</th>
+                <th>Data de Devolução Prevista</th>
+                <th>Data de Devolução</th>
+                <th>Usuário</th>
+                <th>Livros</th>
+            </tr>
+        </th:block>
+    </thead>
+
+    <tbody th:fragment="tbody-handler">
+        <th:block th:switch="${tipoDados}">
+            <th:block th:case="'autores'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-autor(
+                        ${dado})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'mini-categorias'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-categoria(
+                        ${dado}, ${true})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'mini-secoes'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-secao(
+                        ${dado}, ${true})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'mini-usuarios'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-usuario(
+                        ${dado}, ${true})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'mini-livros'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-livro(
+                        ${dado}, ${true})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'mini-locacoes'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-locacao(
+                        ${dado})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'categorias'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-categoria(
+                        ${dado}, ${false})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'secoes'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-secao(
+                        ${dado}, ${false})">
+                    </th:block>
+                </tr>
+            </th:block>
+
+            <th:block th:case="'usuarios'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-usuario(
+                        ${dado}, ${false})">
+                    </th:block>
+                </tr>
+            </th:block>
+            
+            <th:block th:case="'livros'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-livro(
+                        ${dado}, ${false})">
+                    </th:block>
+                    <td>
+                        <div th:include="fragments/tabelas :: tabela(
+                            ${dado.autores}, 'autores')">
+                        </div>
+                    </td>
+                    <td>
+                        <div th:include="fragments/tabelas :: tabela(
+                            ${dado.categorias}, 'mini-categorias')">
+                        </div>
+                    </td>
+                </tr>
+            </th:block>
+            
+            <th:block th:case="'locacoes'">
+                <tr th:each="dado : ${dados}">
+                    <th:block th:include="fragments/conteudo-entidades :: dados-locacao(
+                        ${dado})">
+                    </th:block>
+                    <td>
+                        <div th:include="fragments/tabelas :: tabela(
+                            ${dado.usuario}, 'mini-usuarios')">   
+                        </div>
+                    </td>
+                    <td>
+                        <div th:include="fragments/tabelas :: tabela(
+                            ${dado.livros}, 'mini-livros')">   
+                        </div>
+                    </td>
+                </tr>
+            </th:block>
+        </th:block>
+    </tbody>
+
+    <div class="table-wrapper" th:fragment="tabela(dados, tipoDados)">
+        <table th:class="'tabela-'+${tipoDados}">
+            <thead th:include="fragments/tabelas :: thead-handler"></thead>
+            <tbody th:include="fragments/tabelas :: tbody-handler"></tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

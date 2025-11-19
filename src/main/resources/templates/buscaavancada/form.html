@@ -35,96 +35,28 @@
     <th:block th:if="${pai != null}">
         <th:block th:switch="${tipo}">
             <th:block th:case="autor">
-                <table>
-                    <thead><tr><th>ID</th><th>Nome</th></tr></thead>
-                    <tbody>
-                        <tr th:include="fragments/conteudo-entidades :: dados-autor(${pai}, ${false})"></tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead><tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr></thead>
-                    <tbody>
-                        <tr th:each="livro : ${pai.listaLivros}"
-                        th:include="fragments/conteudo-entidades :: dados-livro(${livro}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
-            </th:block>
-            
-            <th:block th:case="categoria">
-                <table>
-                    <thead><tr><th>ID</th><th>Nome</th><th>Descrição</th></tr></thead>
-                        <tbody>
-                        <tr th:include="fragments/conteudo-entidades :: dados-categoria(${pai}, ${false}, ${true})">
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead><tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr></thead>
-                    <tbody>
-                        <tr th:each="livro : ${pai.listaLivros}"
-                        th:include="fragments/conteudo-entidades :: dados-livro(${livro}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
+                <div th:include="fragments/tabelas :: tabela(${pai}, 'autores')"></div>
+                <div th:include="fragments/tabelas :: tabela(${pai.listaLivros}, 'mini-livros')"></div>
             </th:block>
 
+            <th:block th:case="categoria">
+                <div th:include="fragments/tabelas :: tabela(${pai}, 'categorias')"></div>
+                <div th:include="fragments/tabelas :: tabela(${pai.listaLivros}, 'mini-livros')"></div>
+            </th:block>
+            
             <th:block th:case="secao">
-                <table>
-                    <thead><tr><th>ID</th><th>Nome</th><th>Descrição</th></tr></thead>
-                    <tbody>
-                        <tr th:include="fragments/conteudo-entidades :: dados-secao(${pai}, ${false}, ${true})">
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead><tr><th>ID</th><th>ISBN</th><th>Título</th><th>Ano de Publicação</th></tr></thead>
-                    <tbody>
-                        <tr th:each="livro : ${pai.listaLivros}"
-                        th:include="fragments/conteudo-entidades :: dados-livro(${livro}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
+                <div th:include="fragments/tabelas :: tabela(${pai}, 'secoes')"></div>
+                <div th:include="fragments/tabelas :: tabela(${pai.listaLivros}, 'mini-livros')"></div>
             </th:block>
 
             <th:block th:case="livro">
-                <table>
-                    <thead><tr>
-                        <th>ID</th>
-                        <th>ISBN</th>
-                        <th>Título</th>
-                        <th>Ano de Publicação</th>
-                    </tr></thead>
-                    <tbody>
-                        <tr th:include="fragments/conteudo-entidades :: dados-livro(${pai}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead><tr><th>ID</th><th>Data de Empréstimo</th></tr></thead>
-                    <tbody>
-                        <tr th:each="locacao : ${pai.locacoes}"
-                        th:include="fragments/conteudo-entidades :: dados-locacao(${locacao}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
+                <div th:include="fragments/tabelas :: tabela(${pai}, 'mini-livros')"></div>
+                <div th:include="fragments/tabelas :: tabela(${pai.locacoes}, 'mini-locacoes')"></div>
             </th:block>
 
             <th:block th:case="usuario">
-                <table>
-                    <thead><tr><th>ID</th><th>Nome</th></tr></thead>
-                    <tbody>
-                        <tr th:include="fragments/conteudo-entidades :: dados-usuario(${pai}, ${false}, ${false})"></tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead><tr>
-                        <th>ID</th>
-                        <th>Data de Empréstimo</th>
-                        <th>Devolução Prevista</th>
-                        <th>Data de Devolução</th>
-                    </tr></thead>
-                    <tbody>
-                        <tr th:each="locacao : ${pai.locacoes}"
-                        th:include="fragments/conteudo-entidades :: dados-locacao(
-                            ${locacao}, ${false}, ${false})"></tr>
-                        </tbody>
-                    </table>
+                <div th:include="fragments/tabelas :: tabela(${pai}, 'mini-usuarios')"></div>
+                <div th:include="fragments/tabelas :: tabela(${pai.locacoes}, 'mini-locacoes')"></div>
             </th:block>
         </th:block>
     </th:block>

@@ -14,16 +14,17 @@
 
     <main class="container">
         <div class="header-section">
-            <h1 id="header-section-h1">Excluir Autor</h1>
+            <h1 id="header-section-h1">Gerenciar Autor</h1>
         </div>
 
         <form th:action="@{/autor/delete/{id}(id=${autor.id})}" th:object="${autor}" method="post">
             <div>
-                <label for="nome">Deseja excluir esse autor?</label>
+                <label for="nome">O que deseja fazer com esse autor?</label>
                 <input type="text" id="nome" th:field="*{nome}" readonly>
             </div>
 
             <div class="form-buttons">
+                <a th:href="@{/autor/edit/{id}(id=${autor.id})}" class="btn-acao retornar">Editar</a>
                 <button type="submit">Excluir</button>
                 <a href="/autor/list" class="btn-acao retornar">Voltar</a>
             </div>
