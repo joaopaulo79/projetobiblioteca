@@ -1,50 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Nova Locacao</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BiblioTECH</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/locacao/add-form.css}">
 </head>
 <body>
-    <h1>Criar Nova Locacao</h1>
+    <nav th:insert="/locacao/_navbar-locacao.html"></nav>
 
-    <form th:action="@{/locacao/store}" th:object="${locacao}" method="post">
-        <div>
-            <label for="dataEmprestimo">Data de Empréstimo:</label>
-            <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" required>
-        </div>
-        <div>
-            <label for="dataDevolucaoPrevista">Data de Devolução Prevista:</label>
-            <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}" required>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Nova Locação</h1>
         </div>
 
-        <div hidden>
-            <label for="dataDevolucaoPrevista">Data de Devolução:</label>
-            <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}">
-        </div>
+        <form th:action="@{/locacao/store}" th:object="${locacao}" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="dataEmprestimo" class="header-label">Empréstimo</label>
+                    <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" required>
+                </div>
 
-        <div>
-            <label for="usuario">usuario</label>
-            <select id="usuario" th:field="*{usuario}" required>
-                <option th:each="u : ${listaUsuarios}" 
-                    th:value="${u.id}" 
-                    th:text="${u.nome}">
-            </select>
-        </div>
+                <div class="form-group">
+                    <label for="dataEmprestimo" class="header-label">Devolução Prevista</label>
+                    <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}" required>
+                </div>
 
-        <div>
-            <label for="livros">Livros</label>
-            <select id="livros" th:field="*{livros}" multiple required>
-                <option th:each="l : ${listaLivros}" 
-                    th:value="${l.id}" 
-                    th:text="${l.titulo}">
-            </select>
-        </div>
+                <div class="form-group" hidden>
+                    <label for="dataEmprestimo" class="header-label">Devolução</label>
+                    <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}">
+                </div>
 
-        <div>
-            <button type="submit">Gravar</button>
-        </div>
-    </form>
-    
-    <a href="/locacao/list">Voltar para a lista</a>
+                <div class="form-group">
+                    <label for="usuario"class="header-label">Usuario</label>
+                    <select id="usuario">
+                        <p>--- selecione ---</p>
+                        <option th:each="u : ${listaUsuarios}" th:value="${u.id}" th:text="${u.nome}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="livros" class="header-label">Livros</label>
+                    <select id="livros" multiple class="select-multiple" th:field="*{livros}" required>
+                        <option th:each="l : ${listaLivros}" th:value="${l.id}" th:text="${l.titulo}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-salvar">Salvar</button>
+                <a href="/locacao/list" class="btn-voltar">Cancelar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

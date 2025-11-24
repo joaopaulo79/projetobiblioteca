@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<body>
+    <nav class="navbar" role="navigation" aria-label="Navegação principal" th:fragment="nav-bar">
+        <a href="#" class="brand">
+        <div class="logo">BT</div>
+        <div>
+            <h1>BiblioTECH</h1>
+            <span>Biblioteca & Tecnologia</span>
+        </div>
+        </a>
+
+        <div class="spacer" aria-hidden="true"></div>
+
+        <div class="nav-links" role="menubar" aria-label="Links principais">
+            <a href="/livro/list" role="menuitem">Livros</a>
+            <a href="/locacao/list" role="menuitem">Locações</a>
+            <a href="/categoria/list" role="menuitem">Categorias</a>
+            <a href="/secao/list" role="menuitem">Seção</a>
+            <a href="/usuario/list" role="menuitem" class="active">Usuários</a>
+            <a href="/autor/list" role="menuitem">Autores</a>
+        </div>
+
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </nav>
+</body>
+</html>

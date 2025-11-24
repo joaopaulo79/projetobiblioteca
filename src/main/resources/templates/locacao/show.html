@@ -1,36 +1,45 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Excluir Locação</title>
+    <title>Gerenciar Locação</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/locacao/show.css}">
 </head>
 <body>
-    <h1>Excluir Locação</h1>
+    <nav th:insert="/locacao/_navbar-locacao.html"></nav>
 
-    <form th:action="@{/locacao/delete/{id}(id=${locacao.id})}" th:object="${locacao}" method="post">
-        <table>
-            <tr>
-                <td th:text="${locacao.id}"></td>
-                    <td th:text="${locacao.dataEmprestimo}"></td>
-                    <td th:text="${locacao.dataDevolucaoPrevista}"></td>
-                    <td th:text="${locacao.dataDevolucao} ?: 'Não devolvido'"></td>
-                    <td>
-                        <p>ID: <span th:text="${locacao.usuario.id}"></span> <br />
-                            Nome: <span th:text="${locacao.usuario.nome}"></span></p>
-                    </td>
-                    <td>
-                        <p th:each="livro : ${locacao.livros}">
-                            ISBN: <span th:text="${livro.isbn}"></span> <br />
-                            Título: <span th:text="${livro.titulo}"></span>
-                        </p>
-                    </td>
-                </tr>
-        </table>
-        <div>
-            <button type="submit">Excluir</button>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Gerenciar Locacao</h1>
         </div>
-    </form>
-    
-    <a href="/locacao/list">Voltar para a lista</a>
+
+        <form th:action="@{/locacao/delete/{id}(id=${locacao.id})}" th:object="${locacao}" method="post">
+            <div>
+                <label for="titulo">O que deseja fazer com essa locacao?</label>           
+            </div>
+
+            <div>
+                <label for="titulo" class="label-show">Locação Nº</label>
+                <input type="text" id="titulo" th:field="${locacao.id}" readonly></input>            
+            </div>
+
+            <div>
+                <label for="titulo" class="label-show">Empréstimo</label>
+                <input type="text" id="titulo" th:field="${locacao.dataEmprestimo}" readonly></input>          
+            </div>
+
+            <div>
+                <label for="titulo" class="label-show">Usuário</label>
+                <input type="text" id="titulo" th:field="${locacao.usuario.nome}" readonly></input>            
+            </div>
+
+            <div class="form-buttons">
+                <a th:href="@{/locacao/edit/{id}(id=${locacao.id})}" class="btn-acao editar">Editar</a>
+                <button type="submit">Excluir</button>
+                <a href="/locacao/list" class="btn-acao retornar">Voltar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>
