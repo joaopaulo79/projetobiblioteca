@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Excluir Seção</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/secao/show.css}">
 </head>
 <body>
-    <h1>Excluir Seção</h1>
+    <nav th:insert="/secao/_navbar-secao.html"></nav>
 
-    <form th:action="@{/secao/delete/{id}(id=${secao.id})}" th:object="${secao}" method="post">
-        <table>
-            <tr> 
-                <td th:text="${secao.id}"></td>
-                <td th:text="${secao.nome}"></td>
-                <td th:text="${secao.descricao}"></td>
-            </tr>
-        </table>
-        <div>
-            <button type="submit">Excluir</button>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Gerenciar Seção</h1>
         </div>
-    </form>
-    
-    <a href="/secao/list">Voltar para a lista</a>
+
+        <form th:action="@{/secao/delete/{id}(id=${secao.id})}" th:object="${secao}" method="post">
+            <div>
+                <label for="nome">O que deseja fazer com essa secao?</label>
+                <input type="text" id="nome" th:field="*{nome}" readonly>
+            </div>
+
+            <div class="form-buttons">
+                <a th:href="@{/secao/edit/{id}(id=${secao.id})}" class="btn-acao editar">Editar</a>
+                <button type="submit">Excluir</button>
+                <a href="/secao/list" class="btn-acao retornar">Voltar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

@@ -2,26 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Excluir Livro</title>
+    <title>Excluir Seção</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/secao/show.css}">
 </head>
 <body>
-    <h1>Excluir Livro</h1>
+    <nav th:insert="/secao/_navbar-secao.html"></nav>
 
-    <form th:action="@{/livro/delete/{id}(id=${livro.id})}" th:object="${livro}" method="post">
-        <table>
-            <tr><td th:text="${livro.id}"></td></tr>
-            <tr><td th:text="${livro.isbn}"></td></tr>
-            <tr><td th:text="${livro.titulo}"></td></tr>
-            <tr><td th:text="${livro.editora}"></td></tr>
-            <tr><td th:text="${livro.anoPublicacao}"></td></tr>
-            <tr><td th:text="${livro.numeroEdicao}"></td></tr>
-            <tr><td th:text="${livro.status}"></td></tr>
-        </table>
-        <div>
-            <button type="submit">Excluir</button>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Gerenciar Livro</h1>
         </div>
-    </form>
-    
-    <a href="/livro/list">Voltar para a lista</a>
+
+        <form th:action="@{/livro/delete/{id}(id=${livro.id})}" th:object="${livro}" method="post">
+            <div>
+                <label for="titulo">O que deseja fazer com esse livro?</label>
+                <input type="text" id="titulo" th:field="*{titulo}" readonly>
+            </div>
+
+            <div class="form-buttons">
+                <a th:href="@{/livro/edit/{id}(id=${livro.id})}" class="btn-acao editar">Editar</a>
+                <button type="submit">Excluir</button>
+                <a href="/livro/list" class="btn-acao retornar">Voltar</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>

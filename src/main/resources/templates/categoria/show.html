@@ -13,16 +13,17 @@
 
     <main class="container">
         <div class="header-section">
-            <h1 id="header-section-h1">Excluir Categoria</h1>
+            <h1 id="header-section-h1">Gerenciar Categoria</h1>
         </div>
 
         <form th:action="@{/categoria/delete/{id}(id=${categoria.id})}" th:object="${categoria}" method="post">
             <div>
-                <label for="nome">Deseja excluir essa categoria?</label>
+                <label for="nome">O que deseja fazer com essa categoria?</label>
                 <input type="text" id="nome" th:field="*{nome}" readonly>
             </div>
 
             <div class="form-buttons">
+                <a th:href="@{/categoria/edit/{id}(id=${categoria.id})}" class="btn-acao editar">Editar</a>
                 <button type="submit">Excluir</button>
                 <a href="/categoria/list" class="btn-acao retornar">Voltar</a>
             </div>

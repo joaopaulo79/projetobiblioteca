@@ -98,6 +98,22 @@ button[type="submit"]:hover {
     background-color: #334155;
 }
 
+.btn-acao.editar {
+    background-color: #3b82f6;
+    border: none;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-acao.editar:hover {
+    background-color: #2563eb;
+}
+
 /* ==== Alinhamento dos botões ==== */
 .form-buttons {
     display: flex;

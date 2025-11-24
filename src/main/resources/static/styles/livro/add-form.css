@@ -1,0 +1,192 @@
+/* ==== Layout Geral ==== */
+body {
+    background-color: #0b1120;
+    color: #f0f0f5;
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding-top: 100px;
+}
+
+/* ==== Container ==== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ==== Cabeçalho ==== */
+.header-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-section h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: #fff;
+}
+
+.header-label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+/* ==== Card do formulário ==== */
+form {
+    background-color: #111827;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ==== Grid Responsivo ==== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+}
+
+@media (max-width: 700px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==== Campos ==== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.item {
+    margin-top: 1.5em;
+}
+
+.form-group label {
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+}
+
+/* ==== Select múltiplo estilizado ==== */
+.select-multiple {
+    height: 120px;
+}
+
+/* ==== Botões ==== */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn-salvar {
+    background-color: #10b981;
+    border: none;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #0d966a;
+}
+
+.btn-voltar {
+    background-color: #1e293b;
+    color: #fff;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn-voltar:hover {
+    background-color: #334155;
+}
+
+/* Contêiner geral */
+.form-section {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.form-section.item {
+    margin-top: 1.3em;
+}
+
+/* Label */
+.form-section label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Estilo geral do select múltiplo */
+.select-multiple {
+    width: 100%;
+    height: 200px; /* Aumenta visibilidade */
+    padding: 10px;
+    background: #1f2733;
+    color: #e2e8f0;
+    border: 2px solid #2d3748;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    scrollbar-color: #4a5568 #1f2733;
+    scrollbar-width: thin;
+    transition: 0.2s ease-in-out;
+}
+
+/* Efeito ao focar */
+.select-multiple:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.4);
+}
+
+/* Opções */
+.select-multiple option {
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+/* Ao passar o mouse */
+.select-multiple option:hover {
+    background: #2d3748;
+}
+
+/* Opção selecionada */
+.select-multiple option:checked {
+    background: #3182ce !important;
+    color: white !important;
+}

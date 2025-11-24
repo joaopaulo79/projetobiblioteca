@@ -26,7 +26,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Descrição</th>
-                        <th colspan="2">Ações</th>
+                        <th colspan="1"> </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,10 +35,7 @@
                         <td th:text="${c.nome}"></td>
                         <td th:text="${c.descricao}"></td>
                         <td>
-                            <a th:href="@{/categoria/edit/{id}(id=${c.id})}" class="btn-acao editar">Alterar</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/categoria/show/{id}(id=${c.id})}" class="btn-acao excluir">Excluir</a>
+                            <a th:href="@{/categoria/show/{id}(id=${c.id})}" class="btn-acao editar">Gerenciar</a>
                         </td>
                     </tr>
                 </tbody>

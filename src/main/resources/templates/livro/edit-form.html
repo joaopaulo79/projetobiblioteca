@@ -1,65 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Edita Livro</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BiblioTECH</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/livro/add-form.css}">
 </head>
 <body>
+    <nav th:insert="/livro/_navbar-livro.html"></nav>
 
-    <h2>Edita Livro</h2>
-
-    <form th:action="@{/livro/update/{id}(id=${livro.id})}" th:object="${livro}" method="post">
-        <input type="hidden" th:field="*{id}" />
-        <div>
-            <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" th:field="*{isbn}" required>
-        </div>
-        <div>
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" th:field="*{titulo}" required>
-        </div>
-        <div>
-            <label for="autores">Autores</label>
-            <select id="autores" th:field="*{autores}" multiple required>
-                <option th:each="a : ${listaAutores}" 
-                    th:value="${a.id}" 
-                    th:text="${a.nome}">
-            </select>
-        </div>
-        <div>
-            <label for="categorias">Categorias</label>
-            <select id="categorias" th:field="*{categorias}" multiple required>
-                <option th:each="c : ${listaCategorias}" 
-                    th:value="${c.id}" 
-                    th:text="${c.nome}">
-            </select>
-        </div>
-        <div>
-            <label for="editora">Editora:</label>
-            <input type="text" id="editora" th:field="*{editora}" required>
-        </div>
-        <div>
-            <label for="anoPublicacao">Ano de Publicação:</label>
-            <input type="number" id="anoPublicacao" th:field="*{anoPublicacao}" required>
-        </div>
-        <div>
-            <label for="numeroEdicao">Número da Edição:</label>
-            <input type="number" id="numeroEdicao" th:field="*{numeroEdicao}" required>
-        </div>
-        <div>
-            <label for="secao">Seção</label>
-                <select id="secao" th:field="*{secao}" required>
-                    <option th:each="s : ${listaSecoes}" 
-                        th:value="${s.id}" 
-                        th:text="${s.nome}">
-                </select>
-            <div>
-        </div>
-            <button type="submit">Gravar</button>
-            <a th:href="@{/livro/list}">Voltar</a>
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Editar Livro</h1>
         </div>
 
-    </form>
+        <form id="form-edit" th:action="@{/livro/update/{id}(id=${livro.id})}" th:object="${livro}" method="post">
+
+            <div class="form-grid">
+                <div>
+                    <div class="form-group">
+                        <label for="isbn" class="header-label">ISBN</label>
+                        <input type="text" id="isbn" th:field="*{isbn}" required>
+                    </div>
+
+                    <div class="form-section item">
+                        <div style="flex: 1;">
+                            <label for="autores" class="header-label">Autores</label>
+                            <select id="autores" multiple class="select-multiple">
+                                <option th:each="a : ${listaAutores}" th:value="${a.id}" th:text="${a.nome}"></option>
+                            </select>
+                        </div>
+
+                        <div style="flex: 1;">
+                            <label for="categorias" class="header-label">Categorias</label>
+                            <select id="categorias" multiple class="select-multiple">
+                                <option th:each="c : ${listaCategorias}" th:value="${c.id}" th:text="${c.nome}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group item">
+                        <label for="secao" class="header-label">Seção</label>
+                        <select id="secao" th:field="*{secao}" required>
+                            <option th:each="s : ${listaSecoes}" th:value="${s.id}" th:text="${s.nome}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="titulo" class="header-label">Título</label>
+                        <input type="text" id="titulo" th:field="*{titulo}" required>
+                    </div>
+
+                    <div class="form-group item">
+                        <label for="editora" class="header-label">Editora</label>
+                        <input type="text" id="editora" th:field="*{editora}" required>
+                    </div>
+
+                    <div class="form-group item">
+                        <label for="anoPublicacao" class="header-label">Ano de Publicação</label>
+                        <input type="number" id="anoPublicacao" th:field="*{anoPublicacao}" required>
+                    </div>
+
+                    <div class="form-group item">
+                        <label for="numeroEdicao" class="header-label">Número da Edição</label>
+                        <input type="number" id="numeroEdicao" th:field="*{numeroEdicao}" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-salvar">Salvar</button>
+                <a href="/livro/list" class="btn-voltar">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
 
 </body>
 </html>

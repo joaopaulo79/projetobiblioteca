@@ -4,27 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seções</title>
+
+    <link rel="stylesheet" th:href="@{/styles/navbar/navbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/secao/list.css}">
+
+    <script th:src="@{/scripts/secao/list.js}"></script>
+
 </head>
 <body>
-    <h1>Seções</h1>
-    <a href="/secao/new">Nova Seção</a>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="s : ${secoes}">
-                <td th:text="${s.id}"></td>
-                <td th:text="${s.nome}"></td>
-                <td th:text="${s.descricao}"></td>
-                <td><a th:href="@{/secao/edit/{id}(id=${s.id})}">Alterar</a></td>
-                <td><a th:href="@{/secao/show/{id}(id=${s.id})}">Excluir</a></td>
-            </tr>
-        </tbody>
-    </table>
+    <nav th:insert="/secao/_navbar-secao.html"></nav>
+
+    <main class="container">
+        <div class="header-section">
+            <h1 id="header-section-h1">Seções</h1>
+            <a href="/secao/new" class="btn-novo">+ Nova Seção</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="tabela-categorias">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th colspan="1"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="s : ${secoes}">
+                        <td th:text="${s.id}"></td>
+                        <td th:text="${s.nome}"></td>
+                        <td th:text="${s.descricao}"></td>
+                        <td>
+                            <a th:href="@{/secao/show/{id}(id=${s.id})}" class="btn-acao editar">Gerenciar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>
