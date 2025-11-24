@@ -16,7 +16,7 @@
             <h1 id="header-section-h1">Nova Locação</h1>
         </div>
 
-        <form th:action="@{/locacao/store}" th:object="${locacao}" method="post">
+        <form th:action="@{/locacao/update/{id}(id=${locacao.id})}" th:object="${locacao}" method="post">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="dataEmprestimo" class="header-label">Empréstimo</label>
@@ -24,18 +24,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dataEmprestimo" class="header-label">Devolução Prevista</label>
+                    <label for="dataDevolucaoPrevista" class="header-label">Devolução Prevista</label>
                     <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}" required>
                 </div>
 
                 <div class="form-group" hidden>
-                    <label for="dataEmprestimo" class="header-label">Devolução</label>
-                    <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}">
+                    <label for="dataDevolucao" class="header-label">Devolução</label>
+                    <input type="date" id="dataDevolucao" th:field="*{dataDevolucao}">
                 </div>
 
                 <div class="form-group">
                     <label for="usuario"class="header-label">Usuario</label>
-                    <select id="usuario">
+                    <select id="usuario" th:field="*{usuario}">
                         <p>--- selecione ---</p>
                         <option th:each="u : ${listaUsuarios}" th:value="${u.id}" th:text="${u.nome}"></option>
                     </select>

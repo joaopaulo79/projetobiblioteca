@@ -28,14 +28,14 @@
                     <div class="form-section item">
                         <div style="flex: 1;">
                             <label for="autores" class="header-label">Autores</label>
-                            <select id="autores" multiple class="select-multiple">
+                            <select id="autores" th:field="*{autores}" multiple class="select-multiple">
                                 <option th:each="a : ${listaAutores}" th:value="${a.id}" th:text="${a.nome}"></option>
                             </select>
                         </div>
 
                         <div style="flex: 1;">
                             <label for="categorias" class="header-label">Categorias</label>
-                            <select id="categorias" multiple class="select-multiple">
+                            <select id="categorias" th:field="*{categorias}" multiple class="select-multiple">
                                 <option th:each="c : ${listaCategorias}" th:value="${c.id}" th:text="${c.nome}"></option>
                             </select>
                         </div>

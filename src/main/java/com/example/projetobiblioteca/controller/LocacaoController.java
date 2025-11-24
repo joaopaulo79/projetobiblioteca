@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.projetobiblioteca.model.Livro;
 import com.example.projetobiblioteca.model.Locacao;
 import com.example.projetobiblioteca.repository.LivroRepository;
 import com.example.projetobiblioteca.repository.LocacaoRepository;
@@ -49,6 +50,10 @@ public class LocacaoController {
 
     @PostMapping("/locacao/store")
     public String addLocacao(@ModelAttribute Locacao locacao) {
+        for (Livro livro : locacao.getLivros()) {
+            livro.setStatus(false);
+        }
+
         locacaoRepository.save(locacao);
         return "redirect:/locacao/list";
     }
@@ -71,7 +76,12 @@ public class LocacaoController {
                                 @ModelAttribute("locacao") Locacao locacao,
                                 BindingResult result,
                                 Model model) {
-
+        
+        if (locacao.getDataDevolucao() != null) {
+            for (Livro livro : locacao.getLivros()) {
+                livro.setStatus(true);
+            }
+        }
         locacao.setId(id);
         locacaoRepository.save(locacao);
 
